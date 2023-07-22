@@ -1,0 +1,69 @@
+<html>
+<body>
+<h2>Setting up the Spring Boot project</h2>
+<a href="#use-spring-init">Use Spring Initializr to set up the project</a>
+<a href="#open-the-project">Open in IntelliJ</a>
+<a href="#push-to-github">Push to GitHub</a>
+
+<h3 id="use-spring-init">Use Spring Initializr to set up the project</h3>
+
+<p>Creating a Spring project is most easily done with Spring Boot. Spring even provides a website, the "Spring
+    Initializr",
+    on <a href="https://start.spring.io/">https://start.spring.io/</a>.</p>
+<p>I go to the start.spring.io website and fill in the fields, like setting a name for my project
+    (SpringReactTutorialProject),
+    an artifact (springreacttutorialproject) giving it a group (in my case org.ericwubbo) and a description.
+
+    Note that the artifact, as per best practice, is lowercase only. Since it would be inconvenient if the main class
+    would
+    simply be called `Springreacttutorialproject` (just starting with a S, the rest NOT camelcased), it is helpful to
+    override the name to look like a proper Java class without IntelliJ warnings.
+</p>
+<p>Some of my settings</p>
+<ol>
+    <li>Project: <em>Maven</em> (standard would be Gradle Groovy). Why change from the default? Definitely, Gradle has
+        "\
+        been 'adopt' <a href="https://www.thoughtworks.com/en-gb/radar/tools/gradle">since 2013</a>, and nowadays
+        ThoughtWorks even <a href="https://www.thoughtworks.com/en-sg/radar/languages-and-frameworks/gradle-kotlin-dsl">
+            recommends</a> the Gradle Kotlin variety. However, the power and flexibility of Gradle comes at the price
+        of complexity, and most documentation in my experience still uses Maven examples. With the current relative
+        absence
+        of Gradle Kotlin on Stack Overflow, and my own not-that-developed Gradle knowledge, Maven will be fine enough;
+        if I
+        ever plan to make a big, complex project, preferably with the help of others, Gradle-Kotlin would seem the way
+        to go; but for a proof-of-concept and for exploring Spring itself, Maven it will be for this project.
+    </li>
+    <li>Language: <em>Java</em>. Groovy seems
+        <a href="https://insights.stackoverflow.com/trends?tags=java%2Ckotlin%2Cgroovy">barely used anymore</a>,
+        Kotlin is definitely an interesting option, but as I'm teaching Java at the moment, a Java example project is
+        nicer for demoing purposes.
+    </li>
+    <li>
+        other defaults: taken without comment. Fine for a first project.
+    </li>
+</ol>
+But we still need some dependencies: Spring Initializr's value is mainly in how easy it is to connect useful libraries
+and frameworks. I'll pick six, this time.
+<ul>
+    <li><em>Spring Web</em>: After all, we need to create some kind of API for a full-stack web app!</li>
+    <li><em>Spring Data JPA</em>: Any nontrivial app requires storage, and databases are usually best for that</li>
+    <li><em>PostgreSQL Driver</em>: We also need an actual database to connect to via JPA, PostgreSQL seems at the moment
+        (2023) <a href="https://survey.stackoverflow.co/2023/#databases">the most-used database</a> and is quite loved
+        as well! </li>
+    <li><em>Spring Security</em>: In most web apps, you need to remember users.</li>
+    <li><em>Lombok</em>: Library to make Java code shorter, which is generally a bonus.</li>
+    <li><em>Spring Boot DevTools</em>: Handy library that allows hot reloads.</li>
+</ul>
+
+I press the "Generate"button, download the zip-file, and unpack it into a subfolder of my Development folder.
+
+<h3 id="open-the-project">Open in IntelliJ</h3>
+I open the project in IntelliJ, and let Maven do its stuff. I build and run. It runs, though aborts with a message that
+it cannot find a database. I'll fix that later. First I'll commit.
+
+<h3 id="push-to-github">Push to GitHub</h3>
+I choose VCS from the main menu, 
+
+
+</body>
+</html>
