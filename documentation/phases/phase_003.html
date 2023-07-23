@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Create your first endpoint</h2>
+
+
+<p>Logging in now only results in a Whitelabel error page. We need to serve some page or data, at some endpoint!</p>
+<p>Fortunately, that is easy to do in Spring. Four steps are needed for that:</p>
+<ol>
+    <li><a href="#create_a_class">Create a class</a></li>
+    <li><a href="#annotate_the_class">Annotate the class with a @RestController</a></li>
+    <li><a href="#create_a_method">Create a method in that class that returns some value</a></li>
+    <li><a href="#annotate_the_method">Give the method a @GetMapping (or @Post/@Put or other mapping corresponding to a HTTP verb). Optionally: add a
+        path.</a>
+    </li>
+</ol>
+<p>However, this is easy to do in Spring. We just need to create a class that has some kind of @Controller annotation.
+    As I don't want to serve a regular webpage here (we'll use React for that, later), I'll make it a @RestController.
+</p>
+
+Note: I also discuss <a href="#activate-devtools">how to activate DevTools for hot reload in IntelliJ</a>
+
+<h3 id="create_a_class">Create a class</h3>
+<p>I simply let IntelliJ create a class called "Controller".</p>
+<pre>
+public class Controller {
+}</pre>
+
+<h3 id="annotate_the_class">Annotate the class with a @RestController</h3>
+<p>If you don't annotate the class with @RestController, it won't create endpoints.</p>
+<pre>
+@RestController
+public class Controller {
+}</pre>
+
+<h3 id="create_a_method">Create a method in that class that returns some value</h3>
+<p>You have to be able to give the browser some information when a request is sent. This is done via the return value
+    of a method.</p>
+<pre>
+@RestController
+public class Controller {
+    public String showWelcome() {
+        return "Hello SpringReactTutorialProject!";
+    }
+}</pre>
+
+<h3 id="annotate_the_method">Give the method a @GetMapping (or @Post/@Put or other mapping corresponding to a HTTP verb). Optionally: add a
+    path.</h3>
+<p>If I add @GetMapping, a request from the browser to the "empty path" (localhost:8080) will be handled by this
+    method. I could also use @GetMapping("welcome"), in which case I would get the message if I went to
+    localhost:8080/welcome</p>
+<pre>
+@RestController
+public class Controller {
+    @GetMapping
+    public String showWelcome() {
+        return "Hello SpringReactTutorialProject!";
+    }
+}</pre>
+
+<h2 id="activate-devtools">Extra: make Spring Boot DevTools work in IntelliJ</h2>
+<p>If, like me, you're using IntelliJ community edition, you may have noticed that DevTools, rather than automatically
+reloading the application on each code change, does not actually work! This can be remedied by changing some
+settings in IntelliJ, however, as shown on <a href="https://www.youtube.com/watch?v=BvIM9gNTDM4">youtube</a>. Basically:</p>
+<ul>
+    <li>Go to Settings->Compiler->Build, Execution, Deployment; activate 'Build project automatically'</li>
+    <li>Go to Settings->Advanced Settings; activate Allow auto-make to start</li>
+</ul>
+<p>Now DevTools should work, but allow for 10 seconds or such delay after save.</p>
+
+</body>
+</html>

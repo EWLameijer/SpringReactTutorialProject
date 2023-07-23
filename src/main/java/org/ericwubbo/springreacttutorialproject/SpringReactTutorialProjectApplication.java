@@ -9,5 +9,4 @@ public class SpringReactTutorialProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringReactTutorialProjectApplication.class, args);
 	}
-
 }
