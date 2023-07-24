@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Getting data from and posting data to your app</h2>
+<p>Of course, most applications need something more complex than sending String messages over the internet: usually,
+    to communicate with some kind of web-frontend, you need to pass objects in JSON format. Let us therefore make
+    such objects!</p>
+<p>For demoing purposes, I'll make an online supermarket app. It will have items. The front-end should be able
+    to get all items, get a specified item (via an id, likely), but also be able to add items to the list.
+</p>
+<p>I will execute the following steps:</p>
+<ol>
+    <li><a href="#create_item_class">I'll create an Item class with name, price and id</a></li>
+    <li><a href="#create_item_controller">I'll make an ItemController to 'serve' it (and remove the old Controller)</a></li>
+    <li><a href="#create_item_list">I'll make a list of Items in-memory in the ItemController (will persist later)</a></li>
+    <li>I'll add endpoints/methods to get all items, get an item by id, and create a new item</li>
+</ol>
+
+<h3 id="create_item_class">Creating an item with name, price and id</h3>
+<p>I'll create an Item class with name and price. The name will be a String, obviously, the price a BigDecimal,
+    as that has more accuracy than double when adding and multiplying. I'll also add a constructor.</p>
+<pre>public class Item {
+    private String name;
+
+    private BigDecimal price;
+
+    public Item(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
+}
+</pre>
+
+<h3 id="create_item_controller">Creating an ItemController to 'serve' Item objects</h3>
+<p>I'll now make an ItemController. As would be professional, I don't make it a copy of Controller. I add
+a path ("api/v1/items") to the controller itself, indicating I'm making an API (which returns JSON) instead of an
+ordinary website (which returns an HTML page). v1 helps 'versioning'; if I ever change things, I can make a controller
+that has v2, so clients don't break immediately but can gradually migrate to use the new API. "items" of course
+stands for the Item class, I may want to add other/more objects later, each with their own controller.</p>
+<p>Since I want this path to be valid for all methods in the controller, and I don't want to repeat that String
+    in lots of @GetMappings, I use a new annotation: @RequestMapping.</p>
+
+<h3 id="create_item_list">Create an in-memory list of items for the ItemController to serve</h3>
+
+
+
+</body>
+</html>
