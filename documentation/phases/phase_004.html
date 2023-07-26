@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Getting and posting data</title>
 </head>
 <body>
 <h2>Getting data from and posting data to your app</h2>
-<p>Of course, most applications need something more complex than sending String messages over the internet: usually,
+<p>Of course, most applications need something more complex than sending String messages over the internet. Usually,
     to communicate with some kind of web-frontend, you need to pass objects in JSON format. Let us therefore make
     such objects!</p>
 <p>For demoing purposes, I'll make an online supermarket app. It will have items. The front-end should be able
@@ -15,9 +15,12 @@
 <p>I will execute the following steps:</p>
 <ol>
     <li><a href="#create_item_class">I'll create an Item class with name, price and id</a></li>
-    <li><a href="#create_item_controller">I'll make an ItemController to 'serve' it (and remove the old Controller)</a></li>
-    <li><a href="#create_item_list">I'll make a list of Items in-memory in the ItemController (will persist later)</a></li>
-    <li>I'll add endpoints/methods to get all items, get an item by id, and create a new item</li>
+    <li><a href="#create_item_controller">I'll make an ItemController to 'serve' it (and remove the old Controller
+        class)</a>
+    </li>
+    <li><a href="#create_item_list">I'll make a list of Items in-memory in the ItemController (will persist later)</a>
+    </li>
+    <li><a href="#test_all_endpoints">I'll test all endpoints-do they work?</a></li>
 </ol>
 
 <h3 id="create_item_class">Creating an item with name, price and id</h3>
@@ -37,16 +40,116 @@
 
 <h3 id="create_item_controller">Creating an ItemController to 'serve' Item objects</h3>
 <p>I'll now make an ItemController. As would be professional, I don't make it a copy of Controller. I add
-a path ("api/v1/items") to the controller itself, indicating I'm making an API (which returns JSON) instead of an
-ordinary website (which returns an HTML page). v1 helps 'versioning'; if I ever change things, I can make a controller
-that has v2, so clients don't break immediately but can gradually migrate to use the new API. "items" of course
-stands for the Item class, I may want to add other/more objects later, each with their own controller.</p>
+    a path ("api/v1/items") to the controller itself, indicating I'm making an API (which returns JSON) instead of an
+    ordinary website (which returns an HTML page). v1 helps 'versioning'; if I ever change things, I can make a
+    controller
+    that has v2, so clients don't break immediately but can gradually migrate to use the new API. "items" of course
+    stands for the Item class, I may want to add other/more objects later, each with their own controller.</p>
 <p>Since I want this path to be valid for all methods in the controller, and I don't want to repeat that String
-    in lots of @GetMappings, I use a new annotation: @RequestMapping.</p>
+    in lots of @GetMappings, I use a new annotation: @RequestMapping. This leads to the following start:</p>
+<pre>
+    @RestController
+    @RequestMapping("api/v1/items")
+    public class ItemController {
+    }
+</pre>
 
 <h3 id="create_item_list">Create an in-memory list of items for the ItemController to serve</h3>
+<p>For this demonstration, I don't want to deal with database code at the same time as I create controller code. And I
+    think also that in quite
+    some cases, it may be best to keep classes flexible while trying out functionality and only persist them to
+    databases later.
+    Anyway, I create the list, and incidentally make the Item constructor take a String instead of a BigDecimal, so I
+    don't
+    have to specify new BigDecimal("2.40") or such for every price, but can simply use new Item("apples", "2.40").</p>
+<p>The Item constructor now looks like</p>
+<pre>
+public Item(String name, String price) {
+    this.name = name;
+    this.price = new BigDecimal(price);
+}
+</pre>
+<p>I create the below code</p>
+<pre>
+@RestController
+@RequestMapping("api/v1/items")
+public class ItemController {
+    private final List&lt;Item&gt; items = new ArrayList<>(List.of(
+            new Item("apples", "2.15"),
+            new Item("pears", "4.30"),
+            new Item("prunes", "1.23"),
+            new Item("mangoes", "6.00"))
+    );
 
+    @GetMapping
+    public List&lt;Item&gt; getAll() {
+        return items;
+    }
 
+    @GetMapping("{id}")
+    public Optional&lt;Item&gt; getById(@PathVariable("id") int id) {
+        return id >= 0 && id < items.size() ? Optional.of(items.get(id)) : Optional.empty();
+    }
 
+    @PostMapping
+    public void saveItem(@RequestBody Item item) {
+        items.add(item);
+    }
+}
+</pre>
+<p>You may notice a few new things here:</p>
+<ol>
+    <li>There is now a @RequestMapping that has the shared basic path as argument.</li>
+    <li>@GetMapping("{id}") in combination with @PathVariable("id") ensures that if I use the path api/v1/items/1, id
+        gets the value 1
+    </li>
+    <li>@RequestBody ensures that the ItemController tries to parse the body of the request into an Item object.</li>
+</ol>
+
+<h3 id="test_all_endpoints">I test all endpoints-do they work?</h3>
+<p>But most importantly, does this work?</p>
+<p>Actually, it does not, with the error "No serializer found for class org.ericwubbo.springreacttutorialproject.Item".
+    Serialization means output from a Java class to some (linear) format like JSON. My best guess: I need getter methods
+    in my item class. Fortunately, those are easily added using Lombok's @Getter! I annotate the Item class with getter,
+    (@Getter class Item { ... ) and now both getting methods, the list and individual methods, work! (new Item class
+    below)
+</p>
+<pre>
+@Getter
+public class Item {
+    private String name;
+
+    private BigDecimal price;
+
+    public Item(String name, String price) {
+        this.name = name;
+        this.price = new BigDecimal(price);
+    }
+}
+</pre>
+<p>What about the POST method? For that, I cannot use my regular webbrowser, as (as a user) all URLs I enter are
+    interpreted as GET requests. However, I can use software like <a href="https://www.postman.com/">Postman</a> or
+    <a href="https://httpie.io/">HTTPie</a> to test the POST endpoint.</p>
+<p>I use Postman, first I get a 401 Unauthorized, so I need to set authorization with Basic Auth to achieve something.
+    The items and items/3 endpoints get me what I expect; I now try the POST endpoint (that's the main reason I'm using
+    Postman, after all).</p>
+
+<p>Unfortunately, I still get a response 401 Unauthorized despite using authorization in Postman. Trying to add
+    setters or a default constructor (somewhat desperate
+    attempts) do not work. Checking the internet, I see that this is a known issue(see for example
+    <a href="https://community.postman.com/t/basic-authentication-post-redirect-fail-is-it-a-postman-bug-or-is-there-a-setting-to-fix/14387">
+        here</a> and <a
+            href="https://stackoverflow.com/questions/63669798/spring-security-configuration-does-not-work-on-http-post-request">here</a>);
+    the problem is that Spring Security
+    tries to redirect POST attempts (not GET attempts), which wreaks havoc on the working of Postman (or HTTPie, for
+    that matter).
+
+    The long and short of it is that I need to change Spring security settings in order to make Postman (or HTTPie)
+    POST requests work. I'll have to do that sooner or later, but in this chapter I want to concentrate on the logic
+    of the app, not on authentication/authorization (which is quite a bit of work to get in proper shape anyway),
+    so I disable Spring Security in the Maven pom file, at least for now, and move on to the next step: extending the
+    models to make shopping possible!
+</p>
+<a href="../index.html">Back to overview</a>
 </body>
 </html>
