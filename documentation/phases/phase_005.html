@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding a React front-end: step 1 - let a tool create a React app for you</title>
+</head>
+<body>
+<h1>Adding React to the project</h1>
+<p>
+    In programming, a generally useful technique is that of "vertical slicing", which means that the best way to make
+    an app is not to create a database, and then some kind of back-end code, and then front-end code, but to work
+    feature by feature: first build a feature that a user can see (say, in the front-end), and then let it do something.
+    Then build the next feature.
+</p>
+<p>
+    So, it is time to create a front-end. Based on a Stack Overflow post I will now modify my repository
+    to split it in front-end and back-end folders, as people tend to get confused my multiple 'src' folders in VS
+    Code...
+</p>
+
+<ol>
+    <li><a href="#move_spring_code">Step 1: move the Spring code to a backend folder</a></li>
+    <li><a href="#create_react_app">Step 2: create a React app</a></li>
+</ol>
+
+<h3 id="move_spring_code">Step 1: move the Spring code to a backend folder</h3>
+<p>I simply close IntelliJ, create a folder named 'back-end' in the springreacttutorialproject folder, and move all
+    other
+    contents of the springreacttutorialproject folder except for .git and documentation to it. I open
+    the project again, and after a false start in which IDEA generates an .idea folder at the same level as the back-end
+    (this .idea folder I delete) it works!</p>
+
+<h3 id="create_react_app">Step 2: Create a React project</h3>
+
+<p>
+    React applications can be created by hand, at least in theory.
+    In practice, setting up an app with React is so complicated, that you almost always us a special program for it.
+    Like with many things in the JavaScript ecosystem, there are many ways to create a React app. I will list some
+    of the best-known below: </p>
+<ol>
+    <li>Create React App - the original one, used in many tutorials, but basically deprecated/unsuitable for use in
+        2023
+    </li>
+    <li>Vite: an App creator that can create apps with many other libraries besides React. Is builds your app really
+        fast, shortening development time.
+    </li>
+    <li>Next.js: a React "framework", with lots of functions that React itself does not have</li>
+</ol>
+
+<h3>Create-React-App</h3>
+<p>Create-React-App is the original React app builder. However, it is not very much maintained anymore, using it
+    will give many security vulnerabilities.
+    It's not terrible for hobby projects, but you definitely don't want vulnerabilities in production projects, so it
+    is better to use another option to create react apps.
+</p>
+<h4>Vite</h4>
+<p>You can consider Vite the spiritual successor of Create-React-App: it creates React apps, it just does everything
+    faster if you allow it to use the SWC
+    builder instead of the default Babel/Webpack. Definitely a better option than Create-React-App.
+</p>
+<h4>Next.js</h4>
+<p>Whereas React was always promoted as a library, which helped developers with a few core things, but gave them the
+    freedom to pick and choose complementary
+    JavaScript libraries for specific functionality, like routing, many developers prefer all-included solutions.
+    Next.js is such a 'batteries-included'
+    solution, in contrast to React it is really not a library anymore, but more of a framework, comparable to for
+    example Angular.
+</p>
+<p>Is that good? Should you use a library or a framework? In software design, it is said, there are no solutions,
+    only tradeoffs. If you had to choose between
+    Vite and Next.js:
+<ul>
+    <li>Vite: advantages: has faster build time so regular development will likely go a bit faster. Allows you to
+        import other libraries, so you can adapt the program
+        better to specific needs.
+    </li>
+    <li>Next.js: You don't need to spend time looking for specific libraries and hope they play nicely together.</li>
+</ul>
+
+<p>What to choose? For a relatively simple app, Next.js is likely the easiest choice. The build speed and versatily of
+    Vite are only a major advantage on large projects.
+    So for a demo app like this, Next.js might be a slightly better choice; but as a majority of projects still use
+    React and Vite may make builds a bit
+    more quickly, I'll use Vite here; I once had to include a routing library, which was not that hard. But
+    basically this decision could be defended either way,
+    I would not argue strongly against someone who wanted to make a demo app in Next.js.
+</p>
+
+<h2>What does React do, exactly?</h2>
+<p>I said above that React is a library, not a framework. But a library for what, exactly? After all, you can make
+    fully interactive websites in "vanilla"
+    JavaScript, no frameworks/libraries needed.</p>
+<p>However, regular JavaScript websites have some problems. First, they tend to sprawl to great html-files and
+    scripts of hundreds of lines of code,
+    making it hard to find the part of functionality that needs to be modified or debugged. Second, it is easy
+    for them to change data somewhere
+    and not update the data on all places where it is needed in the browser. Third, even if you update data in the
+    browser, it is far too easy to do that by
+    producing buggy, slow code.
+</p>
+<p>The React library aims to alleviate these problems.</p>
+
+<p> React encourages you to make your app consist not one one large blob of HTML/JS, but out of many smaller
+    components, which you can combine like lego blocks (or classes in other programming languages, like Java). In fact,
+    the original React versions offered
+    classes inheriting from React.Component as the basis of those components (nowadays we mostly use functions,
+    so-called 'functional components').
+</p>
+<p>Next, React makes it easier to update everything correctly as values change. For that, React uses so-called
+    "state". Components can have state, which basically is a set of variables that are 'watched over' by React, and
+    when the state of a component changes, React redraws the component.
+</p>
+<p>Finally, React does its best to make the software fast; it redraws components as efficiently as possible and as
+    little as possible, keeping account
+    of the state. To work optimally, it may make further demands of your code, like giving each item in a list a
+    unique key, but overall the updating works
+    smoothly. This is also because React uses a trick called the "Virtual DOM", in which all changes are drawn, and
+    which
+    is then wholesale written to the browser-
+    whereas normal JavaScript does every update separately in the browser, which is a slower process.
+</p>
+
+<h2>Getting started</h2>
+<p>Go to the folder in which you want to create a folder hosting the React application - in my case the
+    springreacttutorialproject folder
+    (in Windows Explorer: change the
+    address bar of the window, which usually shows something like `C:\GoogleDrive221122` into `cmd` and then press
+    ENTER).
+</p>
+<p>Then run:</p>
+<ol>
+    <li>
+        <pre>npm create vite@latest</pre>
+    </li>
+    <li>Fill in the name of the project, for example
+        <pre>front-end</pre>
+        <p>This creates the front-end folder you need.</p>
+    </li>
+    <li>Choose the other values, like
+        <pre>React</pre>
+        I would also recommend the
+        <pre>JavaScript + SWC</pre>
+        option. (TypeScript is also a good option
+        but a bit more complicated, so for this introduction I'll stick with JavaScript)
+    </li>
+    <li>Follow the instructions. In my case:
+        <pre>
+                    cd front-end
+                    npm install
+                    npm run dev</pre>
+    </li>
+</ol>
+<p>I now go to http://127.0.0.1:5173/ where a default app with counting button is displayed!</p>
+</body>
+</html>
