@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Making the front-end app your own</title>
+</head>
+<body>
+
+<h1>Step 6: making the front-end app your own</h1>
+
+<p>We have now a working demo app, but we really want our own app, not some React + Vite counter demo. Let's go through
+    the various files made by Vite and adjust where needed.
+</p>
+
+<ol>
+    <li><a href="#index_html">Check index.html</a></li>
+    <li><a href="#main_jsx">Check main.jsx</a></li>
+</ol>
+
+<h3 id="index_html">Check index.html</h3>
+<p>By convention, most webpages are called "index.html", since that is the page automatically loaded by the server
+    when it receives
+    a HTTP request. If I would have an org.wubbo server, where the actual server ran at C:\website, a browser going to
+    org.wubbo/lessons would actually
+    load C:\website\lessons\index.html. Likely the name comes from the old days of the internet, where you wanted an
+    index to explore which files
+    from the server's directory you actually needed. Anyway, in all projects check for the location of the index.html,
+    as that is usually the starting
+    point for all JavaScript applications.</p>
+<p>But what should we look for at index.html? Well, it looks like</p>
+<pre>
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;link rel="icon" type="image/svg+xml" href="/vite.svg" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Vite + React&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Most here is standard. I remove the icon link (don't need the vite icon), and change the title into something like
+    ReactTest230723</p>
+<p>I wish to point out two further items.</p>
+<p>First, the div with id=root. This is where React will later insert the actual components.</p>
+<p>Second, the inclusion of the main.jsx script. This is the place where the React code is loaded. So let's check out
+    the main.jsx! (after
+    taking a final look at the new index.html)
+</p>
+<pre>
+  &lt;!doctype html&gt;
+  &lt;html lang="en"&gt;
+    &lt;head&gt;
+      &lt;meta charset="UTF-8" /&gt;
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+      &lt;title&gt;ReactTest230723&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;div id="root"&gt;&lt;/div&gt;
+      &lt;script type="module" src="/src/main.jsx"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+
+<h3 id="main_jsx">Check main.jsx</h3>
+<p>main.jsx is quite short:</p>
+<pre>
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;,
+)
+  </pre>
+<p>First, it imports React and ReactDOM, which are the libraries necessary for using the basics of React (JSX, state), and for displaying its output on web pages, respectively.</p>
+<p>Then, it imports an App and an index.css</p>
+<p>index.css is undoubtedly the stylesheet for index.html, which is apparently imported via the script instead of directly in index.html.</p>
+<p>Note that in contrast to the first two imports, the last two imports start with './'. This means that they are on the 'ordinary' path in the src
+    directory, instead of in the node_modules directory.
+</p>
+<p>What does the App do? We'll see soon. But basically, App is a React component, which are generally imported with statements like these.</p>
+<p>Then there is some 'React magic'. The ReactDOM.createRoot fills the root div in index.html with the contents of the App component. Again, notice some
+    things:
+</p>
+<ol>
+    <li>The render method does not seem to take an ordinary string, array, object or even regex, but some literal that looks like HTML. This is a special
+        notation of React, called JSX (JavaScript XML)
+    </li>
+</ol>
+</body>
+
+
+
+
+</body>
+</html>
