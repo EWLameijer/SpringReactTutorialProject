@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="key_concepts.css">
+    <title>Key concepts to remember</title>
+</head>
+<body>
+<dl>
+    <dt>artifact</dt>
+    <dd>The 'name' of this particular project as it would appear in the package; typically a package would be called
+        <code>nl.itvitae.springreactdemo</code>. In that, <code>springreactdemo</code> would be the (name of the)
+        artifact, <code>nl.itvitae</code> would be called the group. By default, Spring Initializr creates an
+        application with a main class whose name is the same as the name of the package, just starting with a capital
+        letter. If you don't want that, so if you don't want a 'Springreactdemo' main class but say a 'SpringReactDemo'
+        main class, you need to specify that in the 'name' field of the Initializr.
+    </dd>
+    <dt>database</dt>
+    <dd>a database is usually a collection of data, each database is isolated from other databases, like books
+        on a library shelf. Databases are generally created and managed by so-called database management systems (DBMS).
+    </dd>
+    <dt>DBMS</dt>
+    <dd>database management system. Basically, a DBMS is software to create, query, update and delete databases
+    </dd>
+    <dt>dependency</dt>
+    <dd>The name of a class or library on which a certain class or software package depends, and therefore usually
+        needs to be downloaded to your computer and packaged with the final product. In Java, dependencies on libraries
+        are usually managed by specifying which libraries/packages you need via a Maven or Gradle configuration file.
+    </dd>
+    <dt>Dependency Injection ("DI")</dt>
+    <dd>Formally, "injecting" the objects that fields refer to from outside the class, for example by using constructors
+        or setter methods. Contrast to a class creating its own objects, with new, like
+        <code>class Room { Door door = new Door(); }</code>. In professional programming, we often use dependency
+        injection frameworks like Spring to handle dependency injection, so we don't need to add setters or parameters
+        to constructors.
+    </dd>
+    <dt>Gradle</dt>
+    <dd>Build automation tool for Java applications; you write a build script in a special programming language,
+        the Gradle DSL (DSL=Domain-Specific Language). Since Gradle allows the user to specify steps in a complete
+        programming language instead of a regular data format like XML, Gradle is very powerful, but also more complex
+        than
+        Maven. For large, complicated projects, Gradle, especially with the Kotlin DSL (Gradle has two DSLs, a Groovy
+        DSL and a Kotlin DSL) would generally be recommended over Maven.
+    </dd>
+    <dt>Groovy</dt>
+    <dd>A dynamically typed language running on the Java Virtual Machine (JVM), developed around 2003. While it never
+        became very popular, it is an integral part of the first versions of Gradle (Gradle: Groovy DSL), and some of
+        its ideas and notations can be found in newer languages like Kotlin.
+    </dd>
+    <dt>JVM</dt>
+    <dd>
+        The Java Virtual Machine, which is an interpreter for Java bytecode. The Java Virtual Machine not only makes
+        it possible to more easily run Java on a wide variety of machines (since you only need to create a JVM for
+        a certain processor/operating system, not a full compiler, which is a lot more work), but also makes it possible
+        to perform runtime security checks and garbage collection.
+    </dd>
+    <dt>Kotlin</dt>
+    <dd>
+        Another language that runs on the Java Virtual Machine. Kotlin was created around 2011 by JetBrains, the
+        maker of IntelliJ IDEA (and at least half a dozen other IDEs for other languages). Currently, Kotlin has
+        supplanted Java as the primary language for Android development, but it is also occasionally used for back-end
+        projects; Spring, for example, has pretty good Kotlin support. There is also a Gradle Kotlin DSL, the successor
+        of the Gradle Groovy DSL; due to Kotlin's static typing, the Gradle Kotlin DSL is nowadays recommended, but
+        documentation and Stack Overflow answers are still not as developed for the Kotlin DSL as for the Groovy DSL,
+        so for now I don't recommend Gradle Kotlin for beginners, even if it is likely the most powerful option for
+        large, complex projects.
+    </dd>
+    <dt>Lombok</dt>
+    <dd>Lombok is a library that makes writing simple Java classes easier by providing annotations like @Getter that
+        automatically adds getter methods to the fields of a class. While most editors can also automatically generate
+        getter and setter methods, Lombok also makes the code shorter and saves you some shortcut usage whenever you
+        add or remove a field. Note, however, that there are recommendations to avoid some Lombok annotations on
+        entity classes, mainly <a href="https://jpa-buddy.com/blog/lombok-and-jpa-what-may-go-wrong/">@Data,
+            @EqualsAndHashCode, @ToString</a>, and some authors even consider Lombok <a
+                href="https://thorben-janssen.com/lombok-hibernate-how-to-avoid-common-pitfalls/">not worth it</a>.
+    </dd>
+    <dt>Maven</dt>
+    <dd>Build automation tool for Java applications; you write a build script in an XML format. Maven is older than
+        Gradle, more verbose, and less flexible; but it is also simpler to learn and use, and there is much more
+        guidance on it on Stack Overflow. For a beginner's project, Maven is likely the best. Maven's configuration
+        of your project can be found in the pom.xml file.
+    </dd>
+    <dt>PostgreSQL</dt>
+    <dd>PostgreSQL is one of the major "database management systems" (DBMS) in use today. A DBMS is the software that
+        creates, deletes, queries and updates the databases. PostgreSQL, in contrast to many other DBMSes, is
+        free and open source, and seems to be (in 2023) the <a
+                href="https://survey.stackoverflow.co/2023/#most-popular-technologies-database-prof">most popular</a>
+        database used by professional developers.
+    </dd>
+    <dt>PostgreSQL driver</dt>
+    <dd>languages like Java communicate with databases via a kind of generic database code, which is not the same as the
+        various SQL dialects used by the different DBMSes. Therefore, for each individual database you need to download
+        and install a so-called driver, which communicates between the Java-code and the database. As we will be using
+        PostgreSQL in this project, we need to use the PostgreSQL driver, which can be easily installed via the Spring
+        Initializr.
+    </dd>
+    <dt>Spring</dt>
+    <dd>framework that provides a suite of useful libraries that make reading/writing to databases, serving
+        web pages, and lots of other things far easier that using 'pure' Java. The various libraries and classes
+        of the Spring framework are linked together with dependency injection (DI).
+    </dd>
+    <dt>Spring Boot</dt>
+    <dd>framework that makes it easier to create a Spring projects. Usually you start a Spring Boot project
+        via the "Spring Initialzr" website.
+    </dd>
+    <dt>Spring Boot Dev Tools</dt>
+    <dd>a libary that allows a 'hot reload' (automatic recompile when you change and save code). Note that if you want
+        to use the Spring Boot Dev Tools in IntelliJ, you may also need to
+        <a href="https://www.youtube.com/watch?v=BvIM9gNTDM4">change some IntelliJ settings</a> for it to work.
+    </dd>
+    <dt>Spring Data JPA</dt>
+    <dd>Dependency/project that makes it very easy to read from and write to a database, with much less code than is
+        required by the original JDBC (Java DataBase Connectivity) and JPA (Jakarta Persistence API). Interfaces like
+        JpaRepository are part of the Spring Data JPA, though Spring Data JPA also of course implements the
+        JPA-specified annotations like @Entity, @Id, @OneToMany and so on.
+    </dd>
+    <dt>Spring Initializr</dt>
+    <dd>website that makes it easy to create a Spring project; it can be found at <a href="https://start.spring.io/">
+        https://start.spring.io/</a>.
+    </dd>
+    <dt>Spring Security</dt>
+    <dd>Spring Security is a package in Spring that handles authentication, passwords, and logging in and out, which are
+        almost always required for web applications.
+    </dd>
+    <dt>Spring Web</dt>
+    <dd>Dependency/project that makes it easy to create a REST-API with Spring, you can use @GetRequest and @PostRequest
+        and @RestController to create methods and classes that can process a HTTP request and return a value, also
+        via HTTP.
+    </dd>
+</dl>
+</body>
+</html>

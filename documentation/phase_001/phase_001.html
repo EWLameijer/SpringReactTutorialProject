@@ -1,11 +1,77 @@
 <html>
 <body>
-<h2>Setting up the Spring Boot project</h2>
-<a href="#use-spring-init">Use Spring Initializr to set up the project</a>
-<a href="#open-the-project">Open in IntelliJ</a>
-<a href="#push-to-github">Push to GitHub</a>
+<h1>Setting up the Spring Boot project</h1>
+<ol>
+    <li><a href="#why-spring">Why Spring and Spring Boot?</a></li>
+    <li><a href="#use-spring-init">Using Spring Initializr to set up the project</a></li>
+    <li><a href="#open-the-project">Open in IntelliJ</a></li>
+    <li><a href="#push-to-github">Push to GitHub</a></li>
+</ol>
 
-<h3 id="use-spring-init">Use Spring Initializr to set up the project</h3>
+<h2 id="why-spring">Why Spring and Spring Boot?</h2>
+<p>Java is one of the major programming languages- if not <em>the</em> major programming language - for enterprise software development. It is designed
+    to be easy to read and maintain, and hard to make mistakes in; it nowadays has vast, varied, and for a large part
+    free libraries
+    that can provide almost any functionality imaginable, and its performance is for most purposes quite acceptable.
+    This is not to say that you cannot or should not use other languages for enterprise application development, but
+    Java
+    is generally a solid choice.</p>
+<p>The power and vastness of the Java ecosystem has a downside: you can pick and choose from many
+    libraries and frameworks, but not all of them will work nicely together. Of course, with sufficient experience and
+    skill and experimentation you can always make things work, but it is of course useful if a developer can use his
+    or her time to add functionality to a product or remove bugs instead of struggling with conflicts between libraries.
+</p>
+<p>The Spring project was originally meant as a tool to make it easier to write larger Java applications by using
+    a technique called "dependency injection", which means that instead of every class having to create the
+    objects to fill each field, fields can be initialized automatically when needed.</p>
+<p>To clarify: in a simple Java program you can have a Room class which has a field of type Door. When creating
+    the room, the room itself must either initialize the door itself (Door door = new WoodenDoor()), or obtain the door
+    via a setter (void setDoor(Door door)) or constructor (public Room(Door door)), where the constructor would be
+    the preferred choice, as otherwise it would be too easy to make a mistake and build a room without a door (or
+    rather, a room where door is null).
+</p>
+<p>
+    This approach of object construction and manual injection works fine in small projects, but in large projects it can
+    become unwieldy. If an architect wanted to replace all WoodenDoors by MetalDoors, there may be hundreds of places
+    in the code to change; and while this should not be a large problem for a modern IDE ('Find and Replace') any
+    reviewer
+    would still need to check hundreds of lines of commits to be certain of the correctness of the replacement;
+    and it also feels fundamentally wrong to let one simple
+    choice (WoodenDoor should be replaced by MetalDoor) affect hundreds of lines of code. Additionally, if you inject
+    the type via the constructor, you may have to pass the item through multiple layers of constructors to reach
+    the object that finally needs it (a House needs to pass the Door to Floors, which need to pass the Door to
+    Rooms...), which produces lots of low-value 'plumbing code', especially in large applications. Can we do better?
+</p>
+<p>
+    A way to address the problems of 'excessive plumbing' and/or simple requirement changes causing huge code changes is
+    the technique of dependency injection (DI). Dependency injection allows you to specify in each class what kind of
+    components you need (say a Door), and somewhere else in the programme you specify that if the compiler sees an
+    unassigned Door field somewhere, it should be filled with say a freshly created (or shared!) WoodenDoor. Later
+    you'll see code like</p>
+<pre>
+    @Autowired
+    private ItemRepository itemRepository;
+</pre>
+<p>
+    This means that Spring will look for a class that can act like an ItemRepository, creates an object of it (or
+    fetches a pre-made object of that type from storage) and lets the itemRepository field point to it. This is
+    of course very convenient!
+</p>
+<p>
+    Anyway, the advantages of Spring over the functionality built into Java by its creator Sun made it very popular, both for
+    application developers and framework developers. The first public release of the Spring project already had
+    functionality to more easily interact with databases than the 'normal' Java way, and to serve webpages; it has
+    only grown over the past decades and now includes libraries for security, microservices, reactive programming
+    and much more! Spring's many <a href="https://spring.io/">sub-projects</a> allow a developer to (in principle)
+    build even complex functionality relatively easily. Spring is therefore
+    <a href="https://www.jetbrains.com/lp/devecosystem-2022/java/">dominant</a> in the Java ecosystem.
+</p>
+<p>
+    Spring Boot is a Spring project that makes it easier to create Spring projects! It even has a helper website,
+    start.spring.io, which you'll use in the next section.
+</p>
+
+<h2 id="use-spring-init">Using Spring Initializr to set up the project</h2>
 
 <p>Creating a Spring project is most easily done with Spring Boot. Spring even provides a website, the "Spring
     Initializr",
@@ -17,12 +83,11 @@
     Note that the artifact, as per best practice, is lowercase only. Since it would be inconvenient if the main class
     would
     simply be called `Springreacttutorialproject` (just starting with a S, the rest NOT camelcased), it is helpful to
-    override the name to look like a proper Java class without IntelliJ warnings.
+    override the name to look like a proper Java class that won't give warnings in IntellJ about misspellings.
 </p>
 <p>Some of my settings</p>
 <ol>
     <li>Project: <em>Maven</em> (standard would be Gradle Groovy). Why change from the default? Definitely, Gradle has
-        "\
         been 'adopt' <a href="https://www.thoughtworks.com/en-gb/radar/tools/gradle">since 2013</a>, and nowadays
         ThoughtWorks even <a href="https://www.thoughtworks.com/en-sg/radar/languages-and-frameworks/gradle-kotlin-dsl">
             recommends</a> the Gradle Kotlin variety. However, the power and flexibility of Gradle comes at the price
@@ -39,17 +104,19 @@
         nicer for demoing purposes.
     </li>
     <li>
-        other defaults: taken without comment. Fine for a first project.
+        other defaults: accepted without comment. Fine for a first project.
     </li>
 </ol>
 But we still need some dependencies: Spring Initializr's value is mainly in how easy it is to connect useful libraries
 and frameworks. I'll pick six, this time.
 <ul>
     <li><em>Spring Web</em>: After all, we need to create some kind of API for a full-stack web app!</li>
-    <li><em>Spring Data JPA</em>: Any nontrivial app requires storage, and databases are usually best for that</li>
-    <li><em>PostgreSQL Driver</em>: We also need an actual database to connect to via JPA, PostgreSQL seems at the moment
+    <li><em>Spring Data JPA</em>: Any nontrivial app requires storage, and databases are usually best for that.</li>
+    <li><em>PostgreSQL Driver</em>: We also need an actual database to connect to via JPA, PostgreSQL seems at the
+        moment
         (2023) <a href="https://survey.stackoverflow.co/2023/#databases">the most-used database</a> and is quite loved
-        as well! </li>
+        as well!
+    </li>
     <li><em>Spring Security</em>: In most web apps, you need to remember users.</li>
     <li><em>Lombok</em>: Library to make Java code shorter, which is generally a bonus.</li>
     <li><em>Spring Boot DevTools</em>: Handy library that allows hot reloads.</li>
@@ -57,13 +124,11 @@ and frameworks. I'll pick six, this time.
 
 I press the "Generate"button, download the zip-file, and unpack it into a subfolder of my Development folder.
 
-<h3 id="open-the-project">Open in IntelliJ</h3>
+<h2 id="open-the-project">Open in IntelliJ</h2>
 I open the project in IntelliJ, and let Maven do its stuff. I build and run. It runs, though aborts with a message that
 it cannot find a database. I'll fix that later. First I'll commit.
 
-<h3 id="push-to-github">Push to GitHub</h3>
-I choose VCS from the main menu, 
-
-
+<h2 id="push-to-github">Push to GitHub</h2>
+I choose VCS from the main menu, press on Share Project on GitHub, and follow the instructions.
 </body>
 </html>
