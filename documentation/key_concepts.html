@@ -7,9 +7,16 @@
 </head>
 <body>
 <dl>
+    <dt>API</dt>
+    <dd>Application Programming Interface; a set of functions that you can feed data to, and which will
+        give you data back. Is in contrast to a normal user interface, where the inputs are mouse clicks and button
+        presses
+        instead of regular text data or numeric data.
+    </dd>
     <dt>artifact</dt>
     <dd>The 'name' of this particular project as it would appear in the package; typically a package would be called
-        <code>nl.itvitae.springreactdemo</code>. In that, <code>springreactdemo</code> would be the (name of the)
+        <code>nl.itvitae.springreactdemo</code>. In that package name, <code>springreactdemo</code> would be the (name
+        of the)
         artifact, <code>nl.itvitae</code> would be called the group. By default, Spring Initializr creates an
         application with a main class whose name is the same as the name of the package, just starting with a capital
         letter. If you don't want that, so if you don't want a 'Springreactdemo' main class but say a 'SpringReactDemo'
@@ -17,10 +24,11 @@
     </dd>
     <dt>database</dt>
     <dd>a database is usually a collection of data, each database is isolated from other databases, like books
-        on a library shelf. Databases are generally created and managed by so-called database management systems (DBMS).
+        on a library shelf. Databases are generally created and managed by a so-called database management system
+        (DBMS).
     </dd>
     <dt>DBMS</dt>
-    <dd>database management system. Basically, a DBMS is software to create, query, update and delete databases
+    <dd>database management system. Basically, a DBMS is software to create, query, update and delete databases.
     </dd>
     <dt>dependency</dt>
     <dd>The name of a class or library on which a certain class or software package depends, and therefore usually
@@ -29,15 +37,21 @@
     </dd>
     <dt>Dependency Injection ("DI")</dt>
     <dd>Formally, "injecting" the objects that fields refer to from outside the class, for example by using constructors
-        or setter methods. Contrast to a class creating its own objects, with new, like
+        or setter methods. Contrast to a class creating its own objects with <code>new</code>, like
         <code>class Room { Door door = new Door(); }</code>. In professional programming, we often use dependency
         injection frameworks like Spring to handle dependency injection, so we don't need to add setters or parameters
         to constructors.
     </dd>
+    <dt>entity class</dt>
+    <dd>a class that mostly simply stores data, and is converted to a table in a database. An instance of the entity
+        class will usually correspond to a row (or future row) in that table. Entity classes can be contrasted with
+        'normal' classes, which often must do things like
+        providing calculations/services, or an interaction with the internet, like a controller class does.
+    </dd>
     <dt>Gradle</dt>
     <dd>Build automation tool for Java applications; you write a build script in a special programming language,
         the Gradle DSL (DSL=Domain-Specific Language). Since Gradle allows the user to specify steps in a complete
-        programming language instead of a regular data format like XML, Gradle is very powerful, but also more complex
+        programming language instead of a 'mere' data format like XML, Gradle is very powerful, but also more complex
         than
         Maven. For large, complicated projects, Gradle, especially with the Kotlin DSL (Gradle has two DSLs, a Groovy
         DSL and a Kotlin DSL) would generally be recommended over Maven.
@@ -46,6 +60,60 @@
     <dd>A dynamically typed language running on the Java Virtual Machine (JVM), developed around 2003. While it never
         became very popular, it is an integral part of the first versions of Gradle (Gradle: Groovy DSL), and some of
         its ideas and notations can be found in newer languages like Kotlin.
+    </dd>
+    <dt>HTTP</dt>
+    <dd>HyperText Transfer Protocol. HTTP is one of the many protocols by which you can ask information
+        on the internet (the FTP, File Transfer Protocol, is another). HTTP has 'requests' and 'responses'; a client
+        computer sends a request, which has a first line containing the request type (like GET or POST or DELETE),
+        then lines containing key-value pairs, then an empty line, and finally an optional body containing further information. Responses have a
+        first
+        line that contains a status code (like 200-Success or 500-Server error), but for the rest are identical to
+        requests, with key-value pairs, the empty line, and the optional body. Usually, HTTP (or nowadays mostly
+        the secure, encrypted version of it, HTTPS) is the way the front-end
+        (browser part) and the back-end (server part) of web applications communicate.
+    </dd>
+    <dt>Jakarta</dt>
+    <dd>Next to being the capital of Indonesia, Jakarta is also the name for the framework formerly known as JEE
+        (Java Enterprise Edition), which makes it easier to develop commercial applications than the Java SE
+        (Standard Edition, which you could always download for free) does by
+        providing useful methods for database communication and serving websites and such. When Sun and later Oracle
+        developed it, it was called Java EE, but Oracle has decided to stop developing and supporting Java EE
+        (likely because it was probably not that profitable) and gave the project to the community; the community-led
+        version of JavaEE is called Jakarta, and, in contrast to JavaEE, Jakarta is still updated. This is incidentally
+        why, if you use certain dependencies, books and websites often prescribe some javax package, but as the java
+        name
+        is property of Oracle, the Jakarta project (and anyone else) cannot use it, and many old
+        <code>javax.[some_package_name]</code> packages are now called <code>jakarta.[some_package_name]</code>.
+        In the direct sense, the Jakarta project is not immediately important to us because we use Spring (which arose
+        as a strong competitor to the originally rather cumbersome JEE). In the indirect sense, however, the Jakarta
+        project
+        <em>is</em> important, as it is the new standard for new developments and extensions to the Java ecosystem;
+        even while we use Spring, we will use many Jakarta packages and annotations.
+    </dd>
+    <dt>JDBC</dt>
+    <dd>Java DataBase Connectivity: the basic library that Java uses to communicate with the drivers of DBMSes. JDBC
+        is in some sense rather primitive, you write SQL-like statements which JDBC translates into something passed to
+        the DBMS drivers. In most cases, this SQL-writing work is rather cumbersome and can, especially in the hands of
+        developers who are not database experts, create inefficient or slow code; so most Java developers use the higher-level JPA for most
+        of their database work. However, in the rare cases where you have a database performance problems and JPA
+        commands
+        don't optimize the relevant statements well, experts will use JDBC to fine-tune the performance of those
+        critical
+        pieces.
+    </dd>
+    <dt>JPA</dt>
+    <dd>Jakarta Persistence API (formerly known as Java Persistence API). JPA makes reading from and saving to a
+        database possible using 'normal' Java code, instead of forcing the developer to use JDBC´s SQL dialect.
+        In most cases, JPA-level code is shorter and clearer than JDBC code, though experienced developers may
+        still use JDBC for those commands and queries that are not optimized enough by the JPA methods.
+    </dd>
+    <dt>JSON</dt>
+    <dd>JavaScript Object Notation; way of specifying data where objects are indicated with {}, arrays with [],
+        strings with "", numbers and true/false as themselves. [{"name": "Donald Trump", "party": "Republicans",
+        "is-president": false},
+        {"name": "Joe Biden", "party": "Democrats", "year-elected-president": 2020}] would be a JSON notation with two objects
+        representing the current
+        frontrunners for the 2024 presidential elections in the US.
     </dd>
     <dt>JVM</dt>
     <dd>
@@ -57,7 +125,8 @@
     <dt>Kotlin</dt>
     <dd>
         Another language that runs on the Java Virtual Machine. Kotlin was created around 2011 by JetBrains, the
-        maker of IntelliJ IDEA (and at least half a dozen other IDEs for other languages). Currently, Kotlin has
+        maker of IntelliJ IDEA (and at least half a dozen other IDEs for other programming languages). Currently, Kotlin
+        has
         supplanted Java as the primary language for Android development, but it is also occasionally used for back-end
         projects; Spring, for example, has pretty good Kotlin support. There is also a Gradle Kotlin DSL, the successor
         of the Gradle Groovy DSL; due to Kotlin's static typing, the Gradle Kotlin DSL is nowadays recommended, but
@@ -66,8 +135,8 @@
         large, complex projects.
     </dd>
     <dt>Lombok</dt>
-    <dd>Lombok is a library that makes writing simple Java classes easier by providing annotations like @Getter that
-        automatically adds getter methods to the fields of a class. While most editors can also automatically generate
+    <dd>Lombok is a library that makes writing simple Java classes easier by providing annotations like @Getter (which
+        automatically adds getter methods for all fields of a class). While most editors can also automatically generate
         getter and setter methods, Lombok also makes the code shorter and saves you some shortcut usage whenever you
         add or remove a field. Note, however, that there are recommendations to avoid some Lombok annotations on
         entity classes, mainly <a href="https://jpa-buddy.com/blog/lombok-and-jpa-what-may-go-wrong/">@Data,
@@ -81,23 +150,30 @@
         of your project can be found in the pom.xml file.
     </dd>
     <dt>PostgreSQL</dt>
-    <dd>PostgreSQL is one of the major "database management systems" (DBMS) in use today. A DBMS is the software that
-        creates, deletes, queries and updates the databases. PostgreSQL, in contrast to many other DBMSes, is
+    <dd>PostgreSQL is one of the major "database management systems" (DBMS) in use today. PostgreSQL, in contrast to
+        many other DBMSes, is
         free and open source, and seems to be (in 2023) the <a
-                href="https://survey.stackoverflow.co/2023/#most-popular-technologies-database-prof">most popular</a>
-        database used by professional developers.
+                href="https://survey.stackoverflow.co/2023/#most-popular-technologies-database-prof">most popular
+            DBMS</a>
+        used by professional developers.
     </dd>
     <dt>PostgreSQL driver</dt>
     <dd>languages like Java communicate with databases via a kind of generic database code, which is not the same as the
-        various SQL dialects used by the different DBMSes. Therefore, for each individual database you need to download
-        and install a so-called driver, which communicates between the Java-code and the database. As we will be using
+        various SQL dialects used by the different DBMSes. Therefore, for each individual DBMS you need to download
+        and install a so-called driver, which communicates between the Java code and the DBMS. As we will be using
         PostgreSQL in this project, we need to use the PostgreSQL driver, which can be easily installed via the Spring
         Initializr.
     </dd>
+    <dt>REST API</dt>
+    <dd>REST means 'Representational State Transfer'. In practice, we use it mainly for so-called REST APIs, in which
+        you send HTTP requests with a body that contain JSON to a web server; the REST API then returns a HTTP response,
+        possibly also with a JSON body. REST is not the only protocol used (there are XML-based SOAP and the modern
+        GraphQL), but it is the standard for most inter-program communication on the internet.
+    </dd>
     <dt>Spring</dt>
     <dd>framework that provides a suite of useful libraries that make reading/writing to databases, serving
-        web pages, and lots of other things far easier that using 'pure' Java. The various libraries and classes
-        of the Spring framework are linked together with dependency injection (DI).
+        web pages, and lots of other things far easier than they would be if you would exclusively use the inbuilt Java
+        libraries.
     </dd>
     <dt>Spring Boot</dt>
     <dd>framework that makes it easier to create a Spring projects. Usually you start a Spring Boot project
@@ -106,7 +182,7 @@
     <dt>Spring Boot Dev Tools</dt>
     <dd>a libary that allows a 'hot reload' (automatic recompile when you change and save code). Note that if you want
         to use the Spring Boot Dev Tools in IntelliJ, you may also need to
-        <a href="https://www.youtube.com/watch?v=BvIM9gNTDM4">change some IntelliJ settings</a> for it to work.
+        <a href="https://www.youtube.com/watch?v=BvIM9gNTDM4">change some IntelliJ settings</a> in order for it to work.
     </dd>
     <dt>Spring Data JPA</dt>
     <dd>Dependency/project that makes it very easy to read from and write to a database, with much less code than is
@@ -119,11 +195,11 @@
         https://start.spring.io/</a>.
     </dd>
     <dt>Spring Security</dt>
-    <dd>Spring Security is a package in Spring that handles authentication, passwords, and logging in and out, which are
+    <dd>Spring Security is a package in Spring that handles authentication, passwords, and logging in and out. These are
         almost always required for web applications.
     </dd>
     <dt>Spring Web</dt>
-    <dd>Dependency/project that makes it easy to create a REST-API with Spring, you can use @GetRequest and @PostRequest
+    <dd>Dependency/project that makes it easy to create a REST API with Spring, you can use @GetRequest and @PostRequest
         and @RestController to create methods and classes that can process a HTTP request and return a value, also
         via HTTP.
     </dd>
