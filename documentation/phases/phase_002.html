@@ -14,23 +14,22 @@
         <br>
         Reason: Failed to determine a suitable driver class<br>
     </code>
-    <p>This means I need three things: a database as well as configuring the connection. Of course, to have a database I
-        first need to have a DBMS (Database Management System) like PostgreSQL installed on my computer.</p>
-
+    <p>This means I need two things: a database, as well as a connection configured between the database and my program.
+        Of course, to have a database, I
+        first need to have a DBMS (Database Management System) like PostgreSQL installed on my computer. Therefore, I
+        need three things:</p>
     <ol>
         <li><em>The DBMS</em>: The database management system is simple to obtain; google PostgreSQL download,
             use the <a href="https://www.postgresql.org/download/">link</a>,
             and download and install PostgreSQL for your operating system.
         </li>
         <li><em>The database</em>: Simply start the pgAdmin program, login with your username and password(s) and use
-            Servers>PostgreSQL 15>Databases, right click on Databases to Create a database, and give it the appropriate
+            Servers>PostgreSQL 15>Databases, right click on Databases to create a database, and give it the appropriate
             name,
-            like springreactdemo
+            like <code>springreactdemo</code>
         </li>
         <li><em>The configuration file</em>: The configuration file is a bit more work, see below.</li>
     </ol>
-
-    <p></p>
 
     <p>For the configuration I google again, for PostgreSQL and Spring, finding
         <a href="https://www.bezkoder.com/spring-boot-postgresql-example/">an example</a> I can use.</p>
@@ -38,15 +37,22 @@
     <p>Basically, I need to fill the src/main/resources/application.properties with something like</p>
     <code>
         spring.datasource.url= jdbc:postgresql://localhost:5432/$database_name_here<br>
-        spring.datasource.username= postgres<br>
+        spring.datasource.username= $username_here<br>
         spring.datasource.password= $password_here<br>
-        <br>
-        spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true<br>
         spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect<br>
-        <br>
-        # Hibernate ddl auto (create, create-drop, validate, update)<br>
-        spring.jpa.hibernate.ddl-auto= update<br>
+        spring.jpa.hibernate.ddl-auto=update<br>
     </code>
+
+    <p>Note: if IntelliJ gives a security error due to SnakeYAML, add
+    <pre>
+&lt;dependency&gt;
+    &lt;groupId&gt;org.yaml&lt;/groupId&gt;
+    &lt;artifactId&gt;snakeyaml&lt;/artifactId&gt;
+    &lt;version&gt;2.0&lt;/version&gt;
+&lt;/dependency&gt;
+    </pre>
+    to your pom.xml file.
+    </p>
 
     <p>I can now run the project, going to the port where the application is served (localhost:8080) I see a login
         screen,
