@@ -43,6 +43,13 @@
         government server allows traffic from your http address to enter it without additional checks, at least for the
         set time period. This is exactly how a database server and database connection work as well.
     </dd>
+    <dt>controller</dt>
+    <dd>A controller is the name for a class that takes input from outside (typically a user via a web browser, or
+        another program calling the API of your program), and returns some kind of response. A controller fulfills a
+        similar role as a spokesperson of a company: it receives questions/requests, and gives answers. Of course, it
+        can consult with other classes in the application, usually those classes are called "services" or "service
+        classes".
+    </dd>
     <dt>database</dt>
     <dd>a database is usually a collection of data, each database is isolated from other databases, like books
         on a library shelf. Databases are generally created and managed by a so-called database management system
@@ -62,6 +69,11 @@
         <code>class Room { Door door = new Door(); }</code>. In professional programming, we often use dependency
         injection frameworks like Spring to handle dependency injection, so we don't need to add setters or parameters
         to constructors.
+    </dd>
+    <dt>endpoint</dt>
+    <dd>An endpoint is a name for the method called in an API by a web browser or other program. For example,
+        <code>@GetMapping("{id}") public Optional&lt;Item&gt; getItemName(@PathVariable("id") Long id) { return
+            itemRepository.findById(id); }</code> would be called an endpoint.
     </dd>
     <dt>entity class</dt>
     <dd>a class that mostly simply stores data, and is converted to a table in a database. An instance of the entity
@@ -221,6 +233,37 @@
         surfs to a page, and the user's browser (called the 'web client') makes a request for the new web page to
         the (web)server; the web server usually makes a request to the database server, in which interaction the
         web server is the client.
+    </dd>
+    <dt>service</dt>
+    <dd>The term "service" in computer programming can mean one of two things. One meaning of a 'service' is a program
+        that runs in the background of Windows and that is started and stopped automatically, without users generally
+        knowing about its existence. Windows-key + S + "ser" shows a Service overview, where you can see a list
+        of services, like "postgresql-x64-15 - PostgreSQL Server 15" which is running the PostgreSQL DBMS, and listens
+        to requests to port 5432. In Linux, these processes are called "daemons." The more prevalent meaning, however,
+        is of a class that performs some kind of service for another class; typically, a controller class would get a
+        request for an item with a certain id, and since (especially in large programs) developers generally consider
+        it not too nice to let the controller know where to find the database, many developers will make a service class
+        that accesses the database; so the controller gets the request for an item with say id of 3, the controller then
+        asks an object of the server class for the item with id 3, the service class then asks an object of the
+        repository for the item with id 3, then returns that value to the controller, and the controller returns it to
+        the front-end. This may seem overly laborious to you, and for small applications it indeed is. But if
+        controllers grow and become more complex (with all kinds of different error messages) and/or the logic of
+        writing or retrieving objects becomes more complex, having a separate service class can really make your code
+        cleaner and clearer by making it adhere more to the single-responsibility principle.
+    </dd>
+    <dt>Single-responsibility principle</dt>
+    <dd>The Single-responsibility principle (<a href="https://en.wikipedia.org/wiki/Single-responsibility_principle">wikipedia</a>
+        ), means that a unit of code, whether that is a line of code, a method, a
+        class or even a package, should have one main task and do it well. Code that has multiple responsibilities/does
+        multiple things, like <code>int a = b++;</code> which both assigns a value to a <em>and</em> increases b,
+        is generally harder to understand and maintain than two lines (or two methods or two classes) that both have
+        one clear, separate task. Of course, this 'single responsibility' depends on the level
+        of the code, the main method has a far bigger responsibility (running the program) than a method that merely
+        reads an item from a database. Note also that software development is an engineering discipline, so even a
+        principle like this has cases in which one should not apply it, as being overzealous in separating
+        responsibilities can harm maintainability, due to leading to more files. That being said, if code is hard to
+        understand despite having relatively short units of code and clear identifier names, it may be that applying the
+        single-responsibility principle to it will improve code quality and maintainability.
     </dd>
     <dt>Spring</dt>
     <dd>framework that provides a suite of useful libraries that make reading/writing to databases, serving
