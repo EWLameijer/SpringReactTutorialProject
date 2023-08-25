@@ -16,7 +16,8 @@
     </code>
     <p>This means I need two things: a database, as well as a connection configured between the database and my program.
         Of course, to have a database, I
-        first need to have a DBMS (Database Management System) like PostgreSQL installed on my computer.</p>
+        first need to have a DBMS (Database Management System) like PostgreSQL installed on my computer. Therefore, I
+        need three things:</p>
     <ol>
         <li><em>The DBMS</em>: The database management system is simple to obtain; google PostgreSQL download,
             use the <a href="https://www.postgresql.org/download/">link</a>,
@@ -36,13 +37,9 @@
     <p>Basically, I need to fill the src/main/resources/application.properties with something like</p>
     <code>
         spring.datasource.url= jdbc:postgresql://localhost:5432/$database_name_here<br>
-        spring.datasource.username= postgres<br>
+        spring.datasource.username= $username_here<br>
         spring.datasource.password= $password_here<br>
-        <br>
-        spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true<br>
         spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect<br>
-        <br>
-        # Hibernate ddl auto (create, create-drop, validate, update)<br>
         spring.jpa.hibernate.ddl-auto=update<br>
     </code>
 
@@ -54,7 +51,7 @@
     &lt;version&gt;2.0&lt;/version&gt;
 &lt;/dependency&gt;
     </pre>
-    to your
+    to your pom.xml file.
     </p>
 
     <p>I can now run the project, going to the port where the application is served (localhost:8080) I see a login
