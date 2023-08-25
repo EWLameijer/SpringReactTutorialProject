@@ -6,21 +6,21 @@
 </head>
 <body>
 <h2>Getting data from and posting data to your app</h2>
-<p>Of course, most applications need something more complex than sending String messages over the internet. Usually,
+<p>Of course, most applications need something more complex than sending string messages over the internet. Usually,
     to communicate with some kind of web-frontend, you need to pass objects in JSON format. Let us therefore make
     such objects!</p>
-<p>For demoing purposes, I'll make an online supermarket app. It will have items. The front-end should be able
+<p>As a demonstration, I'll make an online supermarket app. It will have items. The front-end should be able
     to get all items, get a specified item (via an id, likely), but also be able to add items to the list.
 </p>
 <p>I will execute the following steps:</p>
 <ol>
-    <li><a href="#create_item_class">I'll create an Item class with name, price and id</a></li>
-    <li><a href="#create_item_controller">I'll make an ItemController to 'serve' it (and remove the old Controller
+    <li><a href="#create_item_class">Creating an Item class with name, price and id</a></li>
+    <li><a href="#create_item_controller">Making an ItemController to communicate items with the WWW (and remove the old Controller
         class)</a>
     </li>
-    <li><a href="#create_item_list">I'll make a list of Items in-memory in the ItemController (will persist later)</a>
+    <li><a href="#create_item_list">Making an in-memory list of Items in the ItemController (will persist later)</a>
     </li>
-    <li><a href="#test_all_endpoints">I'll test all endpoints-do they work?</a></li>
+    <li><a href="#test_all_endpoints">Testing all endpoints-do they work?</a></li>
 </ol>
 
 <h3 id="create_item_class">Creating an item with name, price and id</h3>
@@ -38,7 +38,7 @@
 }
 </pre>
 
-<h3 id="create_item_controller">Creating an ItemController to 'serve' Item objects</h3>
+<h3 id="create_item_controller">Making an ItemController to communicate items with the WWW</h3>
 <p>I'll now make an ItemController. As would be professional, I don't make it a copy of Controller. I add
     a path ("api/v1/items") to the controller itself, indicating I'm making an API (which returns JSON) instead of an
     ordinary website (which returns an HTML page). v1 helps 'versioning'; if I ever change things, I can make a
@@ -54,7 +54,7 @@
     }
 </pre>
 
-<h3 id="create_item_list">Create an in-memory list of items for the ItemController to serve</h3>
+<h3 id="create_item_list">Making an in-memory list of Items in the ItemController</h3>
 <p>For this demonstration, I don't want to deal with database code at the same time as I create controller code. And I
     think also that in quite
     some cases, it may be best to keep classes flexible while trying out functionality and only persist them to
