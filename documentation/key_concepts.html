@@ -70,6 +70,11 @@
         injection frameworks like Spring to handle dependency injection, so we don't need to add setters or parameters
         to constructors.
     </dd>
+    <dt>DOM</dt>
+    <dd>DOM means 'Document Object Model': when a webbrowser receives an HTML page, it parses the HTML to create the
+        structure of the web page in memory, very similar to how Java code is compiled to executable code in a .class
+        file. This DOM can then be displayed on screen.
+    </dd>
     <dt>endpoint</dt>
     <dd>An endpoint is a name for the method called in an API by a web browser or other program. For example,
         <code>@GetMapping("{id}") public Optional&lt;Item&gt; getItemName(@PathVariable("id") Long id) { return
@@ -217,6 +222,22 @@
         PostgreSQL in this project, we need to use the PostgreSQL driver, which can be easily installed via the Spring
         Initializr.
     </dd>
+    <dd>React</dd>
+    <dt>React is a JavaScript library that makes it easier to create front-ends and web-applications than by using
+        'pure'
+        JavaScript. While you can make interactive web pages with normal JavaScript, the process is slow and
+        error-prone, and performance may not be good. That is why people have developed JavaScript libraries to make
+        front-end development easier; first JQuery, then Angular, and later React. React has certain features and also
+        'tricks' to make writing interactive websites easier and to make them more performant. First of all, React
+        allows you to split your website into reusable parts, called components. These components are comparable to
+        classes in object-oriented languages. Second, React offers JSX, JavaScript XML notation, which makes programming
+        a component almost as easy as writing HTML code. Third, React has a so-called "Virtual DOM", meaning that
+        whenever the webpage must change, React first writes all changes to a copy of the website's DOM in memory, and
+        then replaces the real dom with the contents of the virtual DOM; this is much faster than writing changes one
+        by one to the DOM. Fourth, to make efficient updating possible, React works with "state": certain
+        variables/values are important for a React component, if these variables change, the component is redrawn, else
+        it stays the same. This minimizes the number of updates that is performed, and hence also enhances performance.
+    </dt>
     <dt>REST API</dt>
     <dd>REST means 'Representational State Transfer'. In practice, we use it mainly for so-called REST APIs, in which
         you send HTTP requests with a body that contain JSON to a web server; the REST API then returns a HTTP response,

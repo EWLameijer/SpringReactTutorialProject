@@ -5,7 +5,7 @@
     <title>Adding a React front-end: step 1 - let a tool create a React app for you</title>
 </head>
 <body>
-<h1>Adding React to the project</h1>
+<h1>Adding a React front-end: step 1 - let a tool create a React app for you</h1>
 <p>
     In programming, a generally useful technique is that of "vertical slicing", which means that the best way to make
     an app is not to create a database, and then some kind of back-end code, and then front-end code, but to work
@@ -13,7 +13,7 @@
     Then build the next feature.
 </p>
 <p>
-    So, it is time to create a front-end. Based on a Stack Overflow post I will now modify my repository
+    So, it is overdue to create a front-end. Based on a Stack Overflow post I will now modify my repository
     to split it in front-end and back-end folders, as people tend to get confused my multiple 'src' folders in VS
     Code...
 </p>
@@ -48,7 +48,7 @@
 </ol>
 
 <h3>Create-React-App</h3>
-<p>Create-React-App is the original React app builder. However, it is not very much maintained anymore, using it
+<p>Create-React-App is the original React app builder. However, it is not very much maintained anymore, and using it
     will give many security vulnerabilities.
     It's not terrible for hobby projects, but you definitely don't want vulnerabilities in production projects, so it
     is better to use another option to create react apps.
@@ -59,14 +59,13 @@
     builder instead of the default Babel/Webpack. Definitely a better option than Create-React-App.
 </p>
 <h4>Next.js</h4>
-<p>Whereas React was always promoted as a library, which helped developers with a few core things, but gave them the
+<p>React was always promoted as a library, which helped developers with a few core things, but gave them the
     freedom to pick and choose complementary
-    JavaScript libraries for specific functionality, like routing, many developers prefer all-included solutions.
-    Next.js is such a 'batteries-included'
-    solution, in contrast to React it is really not a library anymore, but more of a framework, comparable to for
-    example Angular.
+    JavaScript libraries for specific functionality, like routing. However, many developers prefer all-included
+    solutions. Next.js is such a 'batteries-included' solution. In contrast to React, Next.js is really not a library
+    anymore, but more of a framework, comparable to for example Angular.
 </p>
-<p>Is that good? Should you use a library or a framework? In software design, it is said, there are no solutions,
+<p>@@@Is that good? Should you use a library or a framework? In software design, it is said, there are no solutions,
     only tradeoffs. If you had to choose between
     Vite and Next.js:
 <ul>
@@ -151,5 +150,6 @@
     </li>
 </ol>
 <p>I now go to http://127.0.0.1:5173/ where a default app with counting button is displayed!</p>
+<p><a href="../index.html">Back to overview</a></p>
 </body>
 </html>
