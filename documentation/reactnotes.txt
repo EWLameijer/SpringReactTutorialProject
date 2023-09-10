@@ -1,12 +1,22 @@
-https://www.baeldung.com/spring-security-login-react
-https://www.bezkoder.com/spring-boot-react-jwt-auth/
-    https://www.bezkoder.com/spring-boot-jwt-authentication/ tot Configure Spring Datasource, JPA, App properties
-https://www.youtube.com/watch?v=bqFjrhRrvy8 => tot 20:29
+1 https://www.youtube.com/watch?v=bqFjrhRrvy8 => tot 36:32
 
+1 https://www.bezkoder.com/spring-boot-react-jwt-auth/
+    https://www.bezkoder.com/spring-boot-jwt-authentication/ tot Configure Spring Datasource, JPA, App properties
+        tot Without WebSecurityConfigurerAdapter
+
+https://www.baeldung.com/spring-security-login-react
+    gebruikt trucs met Maven, react project IN spring...
+
+   https://dev.to/kingnelx/how-to-integrate-spring-security-to-react-js-2e9k
+
+https://github.com/ivangfr/springboot-react-basic-auth/tree/master/book-api/src
+
+// WIL NIET MET OKTA!
 https://developer.okta.com/blog/2022/06/17/simple-crud-react-and-spring-boot
     https://developer.okta.com/blog/2022/06/17/simple-crud-react-and-spring-boot#add-a-react-groupedit-component
 
 https://www.taniarascia.com/crud-app-in-react-with-hooks/
+
 
 
 Note: You can use ResponseEntity to return values with a status code in Spring
@@ -53,3 +63,7 @@ Needed?
 	<version>0.11.5</version>
 	<scope>runtime</scope>
 </dependency>
+
+in application.properties
+bezkoder.app.jwtSecret= ======================BezKoder=Spring===========================
+bezkoder.app.jwtExpirationMs=86400000
