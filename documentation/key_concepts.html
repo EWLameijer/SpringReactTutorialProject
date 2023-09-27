@@ -50,6 +50,9 @@
         can consult with other classes in the application, usually those classes are called "services" or "service
         classes".
     </dd>
+    <dt>create-react-app</dt>
+    <dd>The original way to easily create a React app; nowadays, solutions like Vite and Next.js are better for this.
+    </dd>
     <dt>database</dt>
     <dd>a database is usually a collection of data, each database is isolated from other databases, like books
         on a library shelf. Databases are generally created and managed by a so-called database management system
@@ -190,6 +193,11 @@
         guidance on it on Stack Overflow. For a beginner's project, Maven is likely the best. Maven's configuration
         of your project can be found in the pom.xml file.
     </dd>
+    <dt>Next.js</dt>
+    <dd>Next.js is a JavaScript framework for front-end development. It generally works very much like (if not the same
+        as) React, but includes lots of functionality like routing that you have to choose/include/download separately
+        if you would make a 'pure' React project.
+    </dd>
     <dt>pgAdmin</dt>
     <dd>A program, generally installed with the PostgreSQL DBMS, that allows you to create and modify databases
         using a GUI instead of via SQL commands.
@@ -222,8 +230,8 @@
         PostgreSQL in this project, we need to use the PostgreSQL driver, which can be easily installed via the Spring
         Initializr.
     </dd>
-    <dd>React</dd>
-    <dt>React is a JavaScript library that makes it easier to create front-ends and web-applications than by using
+    <dt>React</dt>
+    <dd>React is a JavaScript library that makes it easier to create front-ends and web-applications than by using
         'pure'
         JavaScript. While you can make interactive web pages with normal JavaScript, the process is slow and
         error-prone, and performance may not be good. That is why people have developed JavaScript libraries to make
@@ -237,7 +245,7 @@
         by one to the DOM. Fourth, to make efficient updating possible, React works with "state": certain
         variables/values are important for a React component, if these variables change, the component is redrawn, else
         it stays the same. This minimizes the number of updates that is performed, and hence also enhances performance.
-    </dt>
+    </dd>
     <dt>REST API</dt>
     <dd>REST means 'Representational State Transfer'. In practice, we use it mainly for so-called REST APIs, in which
         you send HTTP requests with a body that contain JSON to a web server; the REST API then returns a HTTP response,
@@ -318,6 +326,11 @@
     <dd>Dependency/project that makes it easy to create a REST API with Spring, you can use @GetRequest and @PostRequest
         and @RestController to create methods and classes that can process a HTTP request and return a value, also
         via HTTP.
+    </dd>
+    <dt>Vite</dt>
+    <dd>Vite is a tool that can help you create and build frontend applications quickly; see the <a
+            href="https://vitejs.dev/guide/">Vite site</a>. I currently use it as a high-quality replacement for
+        create-react-app.
     </dd>
 </dl>
 </body>

@@ -35,13 +35,13 @@
 <p>
     React applications can be created by hand, at least in theory.
     In practice, setting up an app with React is so complicated, that you almost always us a special program for it.
-    Like with many things in the JavaScript ecosystem, there are many ways to create a React app. I will list some
+    As with most things in the JavaScript ecosystem, there are many ways to create a React app. I will list some
     of the best-known below: </p>
 <ol>
     <li>Create React App - the original one, used in many tutorials, but basically deprecated/unsuitable for use in
         2023
     </li>
-    <li>Vite: an App creator that can create apps with many other libraries besides React. Is builds your app really
+    <li>Vite: an App creator that can create apps with many other libraries besides React. It builds your app really
         fast, shortening development time.
     </li>
     <li>Next.js: a React "framework", with lots of functions that React itself does not have</li>
@@ -65,7 +65,7 @@
     solutions. Next.js is such a 'batteries-included' solution. In contrast to React, Next.js is really not a library
     anymore, but more of a framework, comparable to for example Angular.
 </p>
-<p>@@@Is that good? Should you use a library or a framework? In software design, it is said, there are no solutions,
+<p>Is that good? Should you use a library or a framework? In software design, it is said, there are no solutions,
     only tradeoffs. If you had to choose between
     Vite and Next.js:
 <ul>
@@ -86,10 +86,10 @@
 </p>
 
 <h2>What does React do, exactly?</h2>
-<p>I said above that React is a library, not a framework. But a library for what, exactly? After all, you can make
+<p>I have said above that React is a library, not a framework. But a library for what, exactly? After all, you can make
     fully interactive websites in "vanilla"
     JavaScript, no frameworks/libraries needed.</p>
-<p>However, regular JavaScript websites have some problems. First, they tend to sprawl to great html-files and
+<p>However, regular JavaScript websites have some problems. First, they tend to become huge html-files and
     scripts of hundreds of lines of code,
     making it hard to find the part of functionality that needs to be modified or debugged. Second, it is easy
     for them to change data somewhere
@@ -102,12 +102,12 @@
 <p> React encourages you to make your app consist not one one large blob of HTML/JS, but out of many smaller
     components, which you can combine like lego blocks (or classes in other programming languages, like Java). In fact,
     the original React versions offered
-    classes inheriting from React.Component as the basis of those components (nowadays we mostly use functions,
+    classes inheriting from <code>React.Component</code> as the basis of those components (nowadays we mostly use functions,
     so-called 'functional components').
 </p>
 <p>Next, React makes it easier to update everything correctly as values change. For that, React uses so-called
     "state". Components can have state, which basically is a set of variables that are 'watched over' by React, and
-    when the state of a component changes, React redraws the component.
+    when the state of a component changes, React redraws -or, as it is usually called, 're-renders'- the component.
 </p>
 <p>Finally, React does its best to make the software fast; it redraws components as efficiently as possible and as
     little as possible, keeping account
@@ -136,17 +136,16 @@
         <p>This creates the front-end folder you need.</p>
     </li>
     <li>Choose the other values, like
-        <pre>React</pre>
-        I would also recommend the
-        <pre>JavaScript + SWC</pre>
-        option. (TypeScript is also a good option
-        but a bit more complicated, so for this introduction I'll stick with JavaScript)
+        <code>React</code>.
+        I would also recommend the <code>JavaScript + SWC</code>
+        option. (TypeScript is also a good option but a bit more complicated, so for this introduction I'll stick with
+        JavaScript)
     </li>
     <li>Follow the instructions. In my case:
         <pre>
-                    cd front-end
-                    npm install
-                    npm run dev</pre>
+cd front-end
+npm install
+npm run dev</pre>
     </li>
 </ol>
 <p>I now go to http://127.0.0.1:5173/ where a default app with counting button is displayed!</p>
